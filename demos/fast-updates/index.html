@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fast Updates</title>
+  <link rel="stylesheet" href="./local.css">
+  <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css">
+  <link rel="stylesheet" href="./../../main.css">
+  <link href="./../../prism/prism.css" rel="stylesheet" />
+  <script src="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/js/calcite-web.min.js"></script>
+  <script src="https://js.arcgis.com/4.14/"></script>
+  <script src="./../../prism/prism.js"></script>
+  <script id="highest-temp-arcade" type="arcgis/arcade">
+    var highest = -Infinity;
+    var ignoreFields = [ "OBJECTID", "x", "y", "Range" ];
+    for (var att in $feature){
+      var value = $feature[att];
+      if( typeof(value) == 'Number' && IndexOf(ignoreFields, att) == -1){
+        highest = IIF(value > highest, value, highest);
+      }
+    }
+    return highest;
+  </script>
+
+  <script id="lowest-temp-arcade" type="arcgis/arcade">
+    var lowest = Infinity;
+    var ignoreFields = [ "OBJECTID", "x", "y", "Range" ];
+    for (var att in $feature){
+      var value = $feature[att];
+      if( typeof(value) == 'Number' && IndexOf(ignoreFields, att) == -1){
+        lowest = IIF(value < lowest, value, lowest);
+      }
+    }
+    return lowest;
+  </script>
+
+  <script id="size-arcade" type="arcgis/arcade">
+    var AbsTEMP = Abs($feature.F1880)
+      var vs = $view.scale
+      var TempSize = when(
+        AbsTEMP > 5, 35,
+        AbsTEMP > 4, 30,
+        AbsTEMP > 2.5, 25,
+        AbsTEMP > 1, 20,
+        AbsTEMP > 0.5, 15,
+        AbsTEMP > 0.01, 12,
+        AbsTEMP < 0.01, 10,
+        8
+      )
+      when(
+        vs >=37000000, TempSize,
+        vs >=18500000, 2 + TempSize,
+        vs >=9300000, 4 + TempSize,
+        vs >=4700000, 6 + TempSize,
+        vs >=2000000, 8 + TempSize,
+        10 + TempSize
+      );
+  </script>
+</head>
+<body>
+  <main>
+  <header class="top-nav fade-in" role="banner">
+    <div class="grid-container">
+      <div class="column-24">
+        <div class="tablet-hide">
+          <span class="header-title">Fast Updates</span>
+        </div>
+
+        <div class="tablet-show top-nav-flex">
+          <header class="top-nav-flex-title">
+            <a href="/" class="top-nav-link">ArcGIS <span class="phone-hide">API for JavaScript</span></a>
+          </header>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="viewDiv">
+    <div
+      id="toggle-snippet"
+      class="esri-widget esri-widget--button esri-interactive"
+      title="Code Snippet"
+    >
+      <span class="icon-snippet"></span>
+    </div>
+    <div id="code-snippet">
+      <pre data-line="9, 10"><code class="language-js">
+// Updates the underlying data value driving the expression
+// based on the given year provided by the slider
+
+function updateRenderer(value) {
+  renderer = layer.renderer.clone();
+  const sizeVariable = renderer.visualVariables[0];
+  const colorVariable = renderer.visualVariables[1];
+  sizeVariable.valueExpression = getSizeValueExpression(value);
+  colorVariable.valueExpression = getColorValueExpression(value);
+  renderer.visualVariables = [sizeVariable, colorVariable];
+  layer.renderer = renderer;
+}
+      </code></pre>
+    </div>
+  </div>
+  <div id="containerDiv" class="esri-widget" style="width: 520px;">
+    <div class="esri-widget">
+      <div class="esri-widget">
+        <h3>Temperature Anomaly (<span id="yearDiv">1880</span>)</h3>
+      </div>
+      <div id="histogram" class="esri-widget"></div>
+      <div class="labels esri-widget">
+        <span style="float: left">-5° C</span>
+        <span style="float: center">0° C</span>
+        <span style="float: right">+5° C</span>
+      </div>
+    </div>
+  </div>
+  <div id="sliderContainer" class="esri-widget">
+    <div id="sliderDiv"></div>
+  </div>
+</main>
+  <script src="./../../utils/snippet.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>

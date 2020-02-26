@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Tiles</title>
+  <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css">
+  <link rel="stylesheet" href="./../../main.css">
+  <link rel="stylesheet" href="./local.css">
+  <link href="./../../prism/prism.css" rel="stylesheet" />
+  <script src="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/js/calcite-web.min.js"></script>
+  <script src="https://unpkg.com/@esri/calcite-components@1.0.0-beta.11/dist/calcite/calcite.js"></script>
+  <script src="https://js.arcgis.com/4.14/"></script>
+  <script src="./../../prism/prism.js"></script>
+</head>
+<body>
+  <main>
+    <header class="top-nav fade-in" role="banner">
+      <div class="grid-container">
+        <div class="column-24">
+          <div class="tablet-hide">
+            <span class="header-title">FeatureLayer</span>
+          </div>
+
+          <div class="tablet-show top-nav-flex">
+            <header class="top-nav-flex-title">
+              <a href="/" class="top-nav-link">ArcGIS <span class="phone-hide">API for JavaScript</span></a>
+            </header>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="viewDiv">
+      <div
+        id="toggle-snippet"
+        class="esri-widget esri-widget--button esri-interactive"
+        title="Code Snippet"
+      >
+        <span class="icon-snippet"></span>
+      </div>
+      <div id="code-snippet">
+        <calcite-tabs>
+          <calcite-tab-nav slot="tab-nav">
+            <calcite-tab-title is-active>Request</calcite-tab-title>
+            <calcite-tab-title>Headers</calcite-tab-title>
+          </calcite-tab-nav>
+        
+          <calcite-tab is-active><img src="./images/ftiles.png" /></calcite-tab>
+          <calcite-tab><img src="./images/ftiles-headers.png" /></calcite-tab>
+        </calcite-tabs>
+      </div>
+    </div>
+  </main>
+  <script src="./../../utils/snippet.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>

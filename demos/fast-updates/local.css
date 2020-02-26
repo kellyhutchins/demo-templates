@@ -1,0 +1,53 @@
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+#containerDiv {
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0;
+  width: 520px !important;
+}
+
+#sliderDiv {
+  height: 100px;
+}
+
+#histogram {
+  width: 500px;
+  height: 150px;
+}
+.labels {
+  padding: 5px;
+}
+
+/* #viewDiv {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 100px;
+} */
+
+#sliderContainer {
+  /* position: absolute;
+  bottom: 0; */
+  height: 100px;
+  width: 100%;
+  text-align: center;
+}
+
+/* override calcite stuff */
+
+.esri-widget > h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}

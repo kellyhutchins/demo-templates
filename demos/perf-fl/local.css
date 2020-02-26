@@ -1,0 +1,13 @@
+:root {
+  --code-height: 400px;
+  --code-width: 600px;
+  --code-width-close: -600px;
+}
+
+#code-snippet {
+  background: #fff;
+}
+
+calcite-tab-title {
+  margin-left: 5px;
+}
